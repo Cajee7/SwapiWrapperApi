@@ -1,6 +1,7 @@
 ﻿using SwapiWrapperApi.Models;
 using RestSharp;
 using Microsoft.Extensions.Caching.Memory;
+using System.Net;
 
 namespace SwapiWrapperApi.Services
 {
@@ -30,7 +31,11 @@ namespace SwapiWrapperApi.Services
 
             if (!response.IsSuccessful)
             {
-                throw new Exception($"Error fetching films: {response.ErrorMessage}");
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    return null;
+                }   
+                throw new Exception($"Error fetching film: {response.ErrorMessage}");
             }
 
             var cacheEntryOptions = new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5) };
@@ -53,6 +58,10 @@ namespace SwapiWrapperApi.Services
 
             if (!response.IsSuccessful)
             {
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
                 throw new Exception($"Error fetching film: {response.ErrorMessage}");
             }
 
@@ -75,7 +84,7 @@ namespace SwapiWrapperApi.Services
 
             if (film == null || film.Characters == null)
             {
-                throw new Exception("Film or character list not found");
+                return null;
             }
 
             var characters = new List<CharacterModel>();
@@ -112,7 +121,7 @@ namespace SwapiWrapperApi.Services
 
             if (film == null || film.Starships == null)
             {
-                throw new Exception("Film or starship list not found");
+                return null;
             }
 
             var starships = new List<StarshipModel>();
