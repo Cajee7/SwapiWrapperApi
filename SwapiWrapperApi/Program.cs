@@ -103,16 +103,13 @@ namespace SwapiWrapperApi
 
             app.UseCors("MyCors");
 
+            app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWAPI Wrapper API v1");
-                    app.MapGet("/", async context =>
-                    {
-                        context.Response.Redirect("/swagger");
-                    });
                 });
             }
 
@@ -122,7 +119,6 @@ namespace SwapiWrapperApi
             app.UseAuthorization();
 
             app.MapControllers();
-
             app.Run();
         }
     }
