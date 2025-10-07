@@ -1,14 +1,22 @@
-﻿services:
+services:
   - type: web
-    name: share2teach-api
-    runtime: dotnet
-    region: frankfurt  
+    name: swapi-wrapper-api
+    env: docker
     plan: free
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/SwapiWrapperApi.dll
-    env: 
+    region: frankfurt 
+    branch: master     
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: "dotnet SwapiWrapperApi.dll"
+    autoDeploy: true
+    envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
-      - key: ASPNETCORE_URLS
-        value: http://0.0.0.0:10000
-    autoDeploy: true
+      - key: PORT
+        value: 8080
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_ISSUER
+        sync: false
+      - key: JWT_AUDIENCE
+        sync: false
