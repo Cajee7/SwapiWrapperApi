@@ -1,0 +1,14 @@
+﻿services:
+  - type: web
+    name: share2teach-api
+    runtime: dotnet
+    region: frankfurt  
+    plan: free
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/SwapiWrapperApi.dll
+    env: 
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:10000
+    autoDeploy: true

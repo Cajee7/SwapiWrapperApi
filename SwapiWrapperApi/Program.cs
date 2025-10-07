@@ -72,6 +72,7 @@ namespace SwapiWrapperApi
                     Title = "SWAPI Wrapper API",
                     Version = "v1",
                 });
+                c.EnableAnnotations();
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
