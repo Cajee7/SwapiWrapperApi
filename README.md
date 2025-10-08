@@ -1,6 +1,7 @@
 # SwapiWrapperApi
 The **SWAPI Wrapper API** is a simple RESTful API built using **ASP.NET Core** that acts as a wrapper around the [Star Wars API (SWAPI)](https://swapi.dev).  
 It simplifies access to Star Wars data — such as films and characters — by providing clean, well-structured endpoints for client applications to use.
+To see instructions on how to use, please scroll down...
 
 ## 🚀 Features
 - Retrieve a list of **films** from the Star Wars universe.
@@ -63,4 +64,22 @@ It is structured in 3 layers:
 **6. CORS Policy** - Costs configured specifically for 'http://localhost:4200' to prevent unauthorized cross origin requests.
 
 **7. Containerizing with Docker** - Application containerized using Docker to ensure consistent development, testing and deployment environments across different machines and platforms.
+
+## Instructions on how to use
+Before calling any endpoint, you need to be authenticated...
+
+Click on the try it out button at the authenticate endpoint
+Fill in the fields: 
+"username": "admin",
+"password": "Password"
+Thereafter in the response body you will see a message and a token
+
+Copy the token and click on the green authorize button found above the authenticate endpoint. Alternatively you can click on any lock icons as well.
+
+Clicking on the button will open a pop up with the heading available authorizations.
+
+In the value textbox, paste your token in and click on authorize.
+
+Congradulations, you are now authenticated. Now you can use any endpoint. 
+If you get an error that says kerner bearer or a status code 401 error, please repeat the instructions from the top again.
    
