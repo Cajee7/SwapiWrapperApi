@@ -105,14 +105,12 @@ namespace SwapiWrapperApi
             app.UseCors("MyCors");
 
             app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWAPI Wrapper API v1");
-                });
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SWAPI Wrapper API v1");
+                c.RoutePrefix = "swagger";
+            });
 
             app.UseHttpsRedirection();
 
