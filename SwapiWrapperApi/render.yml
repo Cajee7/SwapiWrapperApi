@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: swapi-wrapper-api
-    env: docker
+    name: swapiWrapperApi-api
+    runtime: dotnet
+    region: frankfurt  
     plan: free
-    region: frankfurt 
     branch: master     
     dockerfilePath: ./Dockerfile
     buildCommand: ""
